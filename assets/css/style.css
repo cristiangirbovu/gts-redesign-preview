@@ -264,6 +264,16 @@ footer a:hover{color:#fff}
 .mobile-bar .btn{flex:1;font-size:.95rem;padding:.8rem}
 .wa{background:#25d366;color:#fff}
 
+/* ---------- Afirmatii de confirmat (doar in modul de verificare) ----------
+   In productie clasa .review lipseste de pe <html>, deci textul apare normal. */
+.review .tbc{background:#fff3cd;box-shadow:0 0 0 2px #fff3cd;border-bottom:2px dotted #b8860b;border-radius:2px}
+.review .tbc::after{content:"de confirmat";display:inline-block;vertical-align:super;
+  font-size:.62em;font-weight:800;letter-spacing:.04em;text-transform:uppercase;
+  background:#b8860b;color:#fff;padding:.08em .4em;border-radius:3px;margin-left:.3em;white-space:nowrap}
+.review .tbc *{background:transparent}
+.review-bar{background:#b8860b;color:#fff;font-size:.86rem;font-weight:600;text-align:center;padding:.6rem 20px;line-height:1.4}
+.review-bar b{color:#fff3cd}
+
 /* ---------- Reveal ----------
    Ascundem doar daca JS chiar ruleaza (clasa .js e pusa de un script inline din <head>).
    Fara asta, o eroare de JS ar face continutul invizibil. */

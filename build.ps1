@@ -14,7 +14,11 @@ param(
   # Prefix pentru gazduire pe subcale (ex: GitHub Pages proiect).
   #   productie / Cloudflare Pages / preview local:  -BasePath ''      (implicit)
   #   GitHub Pages proiect:                          -BasePath '/gts-redesign-preview'
-  [string]$BasePath = ''
+  [string]$BasePath = '',
+
+  # Modul de verificare: evidentiaza afirmatiile marcate cu <span class="tbc">
+  # si adauga banda explicativa. Se dezactiveaza cu -Review:$false pentru productie.
+  [bool]$Review = $true
 )
 
 $ErrorActionPreference = 'Stop'
@@ -78,6 +82,16 @@ function Render-Page([string]$raw, [string]$sourceName) {
   $html = $html.Replace('{{TITLE}}',   $meta['title'])
   $html = $html.Replace('{{DESC}}',    $meta['desc'])
   $html = $html.Replace('{{URL}}',     $url)
+
+  if ($Review) {
+    $html = $html.Replace('{{REVIEWCLASS}}', ' class="review"')
+    $html = $html.Replace('{{REVIEWBAR}}',
+      '<div class="review-bar">Versiune de verificare. Textele marcate cu galben si eticheta <b>de confirmat</b> sunt propuneri redactate de noi, care asteapta confirmarea dumneavoastra inainte de publicare.</div>')
+  } else {
+    $html = $html.Replace('{{REVIEWCLASS}}', '')
+    $html = $html.Replace('{{REVIEWBAR}}', '')
+  }
+
   $html = Expand-Partials $html
 
   $nav = $meta['nav']
