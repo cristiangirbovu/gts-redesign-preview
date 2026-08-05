@@ -29,6 +29,9 @@
 
   // Reveal on scroll
   var els = document.querySelectorAll('.reveal');
+  function revealAll() {
+    els.forEach(function (el) { el.classList.add('in'); });
+  }
   if ('IntersectionObserver' in window) {
     var io = new IntersectionObserver(function (entries) {
       entries.forEach(function (e) {
@@ -36,8 +39,13 @@
       });
     }, { threshold: 0.12 });
     els.forEach(function (el) { io.observe(el); });
+    // Plasa de siguranta: daca observerul nu s-a declansat deloc in 3 secunde,
+    // afisam tot. Continutul nu are voie sa ramana ascuns din cauza unei animatii.
+    setTimeout(function () {
+      if (document.querySelectorAll('.reveal.in').length === 0) { revealAll(); }
+    }, 3000);
   } else {
-    els.forEach(function (el) { el.classList.add('in'); });
+    revealAll();
   }
 
   // "Cere ofertă" din header duce la formular, oriunde s-ar afla

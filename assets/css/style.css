@@ -264,9 +264,11 @@ footer a:hover{color:#fff}
 .mobile-bar .btn{flex:1;font-size:.95rem;padding:.8rem}
 .wa{background:#25d366;color:#fff}
 
-/* ---------- Reveal ---------- */
-.reveal{opacity:0;transform:translateY(18px);transition:opacity .6s ease,transform .6s ease}
-.reveal.in{opacity:1;transform:none}
+/* ---------- Reveal ----------
+   Ascundem doar daca JS chiar ruleaza (clasa .js e pusa de un script inline din <head>).
+   Fara asta, o eroare de JS ar face continutul invizibil. */
+.js .reveal{opacity:0;transform:translateY(18px);transition:opacity .6s ease,transform .6s ease}
+.js .reveal.in{opacity:1;transform:none}
 
 /* ---------- Responsive ---------- */
 @media(max-width:1000px){
@@ -304,4 +306,4 @@ footer a:hover{color:#fff}
   .topbar .hide-sm{display:none}
   .foot-grid{grid-template-columns:1fr}
 }
-@media(prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none}*{scroll-behavior:auto}}
+@media(prefers-reduced-motion:reduce){.js .reveal{opacity:1;transform:none;transition:none}*{scroll-behavior:auto}}
