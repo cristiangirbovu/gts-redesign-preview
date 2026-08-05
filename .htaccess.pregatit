@@ -1,0 +1,57 @@
+# =============================================================================
+#  ATENTIE: fisier INACTIV. Este pregatit pentru momentul punerii in productie.
+#  Ca sa devina activ trebuie redenumit in ".htaccess" pe serverul live.
+#  Nu il activa pe preview.
+#
+#  Inainte de activare: verifica lista reala de URL-uri indexate din
+#  Google Search Console si completeaza redirectionarile lipsa.
+# =============================================================================
+
+RewriteEngine On
+
+# --- www + https canonic ---------------------------------------------------
+RewriteCond %{HTTPS} off [OR]
+RewriteCond %{HTTP_HOST} !^www\. [NC]
+RewriteRule ^(.*)$ https://www.gtstraduceri.ro/$1 [R=301,L]
+
+# --- redirectionari de pe structura veche ----------------------------------
+# Paginile vechi isi pastreaza autoritatea acumulata daca sunt redirectionate
+# 301 catre echivalentul lor nou. Fara asta, pozitiile actuale se pierd.
+
+Redirect 301 /page1.html            /traduceri-autorizate/
+Redirect 301 /page2.html            /preturi/
+Redirect 301 /page3.html            /traduceri-buzau/
+Redirect 301 /page4.html            /traduceri-bucuresti/
+Redirect 301 /page5.html            /intrebari-frecvente/
+Redirect 301 /servicii.html         /traduceri-autorizate/
+Redirect 301 /faq.html              /intrebari-frecvente/
+Redirect 301 /acreditare-iso.html   /acreditare-iso/
+Redirect 301 /confidentialitate.html /confidentialitate/
+Redirect 301 /termeni.html          /termeni/
+
+# --- blog mutat de pe subdomeniu -------------------------------------------
+# Acestea se pun pe subdomeniul blog.gtstraduceri.ro, nu aici.
+# Fiecare articol primeste adresa noua, cu subiectul in URL:
+#   blog.gtstraduceri.ro/postari/215  ->  www.gtstraduceri.ro/blog/apostila-de-la-haga/
+# Lista completa se face la migrare, articol cu articol.
+
+# --- fara index.html duplicat ----------------------------------------------
+RewriteCond %{THE_REQUEST} /index\.html[\s?] [NC]
+RewriteRule ^(.*)index\.html$ /$1 [R=301,L]
+
+# --- compresie si cache ----------------------------------------------------
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html text/css application/javascript image/svg+xml
+</IfModule>
+<IfModule mod_expires.c>
+  ExpiresActive On
+  ExpiresByType text/css            "access plus 1 year"
+  ExpiresByType application/javascript "access plus 1 year"
+  ExpiresByType image/jpeg          "access plus 1 year"
+  ExpiresByType image/png           "access plus 1 year"
+  ExpiresByType image/svg+xml       "access plus 1 year"
+  ExpiresByType text/html           "access plus 0 seconds"
+</IfModule>
+
+# --- pagina 404 ------------------------------------------------------------
+ErrorDocument 404 /404.html

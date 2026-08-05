@@ -1,0 +1,58 @@
+[
+  {
+    "slug": "engleza",
+    "limba": "Engleză",
+    "limbaJos": "engleză",
+    "dinLimba": "din și în engleză",
+    "specific": "Engleza este limba în care primim cele mai multe cereri, iar asta înseamnă și cea mai mare varietate de documente. Lucrăm curent cu acte emise în Marea Britanie, Irlanda, Statele Unite și Canada, dar și cu documente redactate în engleză de instituții din alte țări, pentru că este limba folosită în majoritatea dosarelor internaționale.",
+    "docs": [
+      "Diplome, foi matricole și suplimente la diplomă, pentru echivalare sau înscriere la universități",
+      "Contracte de muncă, adeverințe de venit și recomandări pentru angajare",
+      "Acte de stare civilă pentru dosare de rezidență și cetățenie",
+      "Documente de firmă, contracte comerciale și situații financiare",
+      "Acte medicale pentru tratament sau consult în străinătate"
+    ]
+  },
+  {
+    "slug": "germana",
+    "limba": "Germană",
+    "limbaJos": "germană",
+    "dinLimba": "din și în germană",
+    "specific": "Germana vine cel mai des la pachet cu două categorii foarte diferite: actele auto pentru mașinile aduse din Germania și Austria, respectiv documentele de angajare pentru cei care pleacă la muncă. Formularele germane sunt standardizate și pline de abrevieri, iar traducătorii noștri le cunosc, ceea ce scurtează timpul și elimină erorile de transcriere.",
+    "docs": [
+      "Fahrzeugbrief și Fahrzeugschein, pentru înmatricularea vehiculelor",
+      "Contracte de muncă, Arbeitsvertrag și adeverințe de la angajator",
+      "Diplome și certificate de calificare profesională",
+      "Acte de stare civilă pentru dosare la autoritățile germane și austriece",
+      "Documentație tehnică, manuale și fișe de securitate"
+    ]
+  },
+  {
+    "slug": "italiana",
+    "limba": "Italiană",
+    "limbaJos": "italiană",
+    "dinLimba": "din și în italiană",
+    "specific": "Italiana este a doua cea mai cerută limbă la biroul nostru, în bună măsură din cauza comunității românești din Italia. Vin frecvent acte de stare civilă emise de comune italiene, documente de muncă și acte auto. Cunoaștem formatul documentelor emise de administrația italiană și transcrierea corectă a localităților, care este o sursă frecventă de probleme.",
+    "docs": [
+      "Certificate emise de comune italiene, inclusiv în format multilingv",
+      "Carta di Circolazione și acte pentru înmatricularea vehiculelor",
+      "Contracte de muncă și documente de la INPS",
+      "Acte de studii pentru echivalare",
+      "Documente medicale și de asigurare"
+    ]
+  },
+  {
+    "slug": "spaniola",
+    "limba": "Spaniolă",
+    "limbaJos": "spaniolă",
+    "dinLimba": "din și în spaniolă",
+    "specific": "Pentru spaniolă primim documente atât din Spania, cât și din țările Americii Latine, iar diferențele de terminologie administrativă între ele sunt reale. Le tratăm ca atare, pentru că un termen folosit în Spania poate să nu însemne același lucru într-un act emis în Argentina sau în Mexic.",
+    "docs": [
+      "Acte de stare civilă pentru dosare de rezidență și cetățenie",
+      "Contracte de muncă și documente de la Seguridad Social",
+      "Diplome și certificate de studii pentru homologare",
+      "Documente comerciale și contracte",
+      "Acte notariale și procuri"
+    ]
+  }
+]

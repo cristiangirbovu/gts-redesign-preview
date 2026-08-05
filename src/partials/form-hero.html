@@ -1,0 +1,68 @@
+<div class="form-card" id="oferta">
+  <h2>Cere ofertă în 2 ore</h2>
+  <p class="sub">Atașează documentul și îți spunem preț și termen. Fără obligații.</p>
+  <form action="https://formsubmit.co/gts_trad@yahoo.com" method="POST" enctype="multipart/form-data" target="_blank">
+    <input type="hidden" name="_subject" value="Cerere Traduceri - Formular Website">
+    <input type="hidden" name="_captcha" value="false">
+    <input type="hidden" name="_template" value="table">
+    <input type="hidden" name="_next" value="https://www.gtstraduceri.ro/thanks.html">
+    <input type="text" name="_honey" style="display:none">
+    <input type="hidden" name="_autoresponse" value="Multumim pentru cererea dumneavoastra! Vom reveni la dumneavoastra in cel mai scurt timp posibil.">
+
+    <div class="two">
+      <div class="field">
+        <label for="h-name">Nume complet *</label>
+        <input type="text" id="h-name" name="Nume_Complet" required autocomplete="name">
+      </div>
+      <div class="field">
+        <label for="h-phone">Telefon</label>
+        <input type="tel" id="h-phone" name="Telefon" autocomplete="tel">
+      </div>
+    </div>
+
+    <div class="two">
+      <div class="field">
+        <label for="h-email">Adresă email *</label>
+        <input type="email" id="h-email" name="email" required autocomplete="email">
+      </div>
+      <div class="field">
+        <label for="h-serv">Tip serviciu *</label>
+        <select id="h-serv" name="Tip_Serviciu" required>
+          <option value="">Selectează</option>
+          <option value="Traduceri Autorizate">Traduceri autorizate</option>
+          <option value="Traduceri Legalizate">Traduceri legalizate</option>
+          <option value="Apostilă/Supralegalizare Camera Notarilor Publici, Viză MAE / Ambasadă">Apostilă / Supralegalizare</option>
+          <option value="Traduceri Tehnice">Traduceri tehnice</option>
+          <option value="Transcriere Audio-Video">Transcriere audio-video</option>
+          <option value="Interpretariat">Interpretariat</option>
+          <option value="Subtitrare Video">Subtitrare video</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="field">
+      <label for="h-msg">Detalii (opțional)</label>
+      <textarea id="h-msg" name="Mesaj" rows="2" placeholder="Ex: am nevoie de legalizare, plec pe 15 august, sunt 3 documente..."></textarea>
+    </div>
+
+    <div class="field">
+      <label>Atașează documentul</label>
+      <label class="file" for="h-doc">
+        <b>Alege fișierul</b> sau trage-l aici
+        <small>PDF, DOC, DOCX, JPG, PNG, TXT (max 10MB)</small>
+        <input type="file" id="h-doc" name="attachment" accept=".pdf,.doc,.docx,.jpg,.jpeg,.png,.txt">
+      </label>
+    </div>
+
+    <label class="consent">
+      <input type="checkbox" name="Acord_Confidentialitate" required>
+      <span>Sunt de acord cu <a href="/confidentialitate/" target="_blank">politica de confidențialitate</a> și procesarea datelor personale.</span>
+    </label>
+
+    <button type="submit" class="btn btn-primary btn-block">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2 11 13"/><path d="M22 2 15 22l-4-9-9-4Z"/></svg>
+      Trimite cererea
+    </button>
+    <p class="form-note">Răspundem în maxim 2 ore, în timpul programului.</p>
+  </form>
+</div>
