@@ -84,7 +84,7 @@ function Render-Page([string]$raw, [string]$sourceName) {
   $html = $html.Replace('{{URL}}',     $url)
 
   if ($Review) {
-    $html = $html.Replace('{{REVIEWCLASS}}', ' class="review"')
+    $html = $html.Replace('{{REVIEWCLASS}}', ' class="review-mode"')
     $html = $html.Replace('{{REVIEWBAR}}',
       '<div class="review-bar">Versiune de verificare. Textele marcate cu galben si eticheta <b>de confirmat</b> sunt propuneri redactate de noi, care asteapta confirmarea dumneavoastra inainte de publicare.</div>')
   } else {

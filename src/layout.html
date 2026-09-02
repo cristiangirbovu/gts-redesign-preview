@@ -12,7 +12,13 @@
 <meta property="og:url" content="https://www.gtstraduceri.ro{{URL}}">
 <meta property="og:locale" content="ro_RO">
 <meta name="robots" content="noindex,nofollow">
+<link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/assets/img/favicon-64.png" sizes="64x64" type="image/png">
+<link rel="apple-touch-icon" href="/assets/img/favicon-64.png">
 <script>document.documentElement.className+=' js';</script>
+<link rel="preload" href="/assets/fonts/source-sans-3-latin-ext-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/assets/fonts/source-sans-3-latin-ext-600-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/assets/css/fonts.css">
 <link rel="stylesheet" href="/assets/css/style.css">
 {{HEAD}}
 </head>
@@ -39,23 +45,25 @@
 <!-- Header -->
 <header class="site">
   <div class="wrap nav">
-    <a class="brand" href="/">
-      <span class="mark">GTS</span>
-      <span>GTS Company<small>Traduceri autorizate din 2004</small></span>
+    <a class="brand" href="/" aria-label="GTS Traduceri, pagina principală">
+      <img src="/assets/img/gts-logo.svg" alt="GTS Traduceri" width="555" height="338">
     </a>
 
     <nav class="nav-links" id="menu">
       <div class="nav-item">
         <a href="/traduceri-autorizate/" data-k="servicii">Servicii</a>
         <div class="dropdown">
-          <a href="/traduceri-autorizate/">Traduceri autorizate<small>Semnate și ștampilate de traducător autorizat MJ</small></a>
-          <a href="/traduceri-legalizate/">Traduceri legalizate<small>Legalizare notarială a traducerii</small></a>
-          <a href="/apostila-de-la-haga/">Apostila de la Haga<small>Apostilă, supralegalizare, viză MAE</small></a>
-          <a href="/traduceri-tehnice/">Traduceri tehnice<small>Manuale, licitații, documentație CE</small></a>
+          <a href="/traduceri-autorizate/">Traduceri autorizate<small>Juridice, economice, tehnice, medicale</small></a>
+          <a href="/traduceri-legalizate/">Traduceri legalizate<small>Traduceri oficiale pentru uz legal</small></a>
+          <a href="/interpretariat/">Interpretariat<small>Asistență la semnarea documentelor</small></a>
+          <a href="/colationare/">Colaționare<small>Verificare și corectare traduceri</small></a>
+          <a href="/legalizare/">Legalizare<small>Serviciu suplimentar, la cerere</small></a>
+          <a href="/apostila-de-la-haga/">Apostilă și supralegalizare<small>Camera Notarilor, viză MAE, ambasadă</small></a>
+          <a href="/prelucrare-dtp/">Prelucrare DTP<small>Documente complexe cu grafice</small></a>
+          <a href="/transcriere-audio-video/">Transcriere audio-video<small>Conferințe, interviuri, cursuri</small></a>
+          <a href="/subtitrare-video/">Subtitrare video<small>Cursuri, documentare, materiale video</small></a>
           <div class="sep"></div>
-          <a href="/interpretariat/">Interpretariat</a>
-          <a href="/transcriere-audio-video/">Transcriere audio-video</a>
-          <a href="/subtitrare-video/">Subtitrare video</a>
+          <a href="/traduceri-tehnice/">Traduceri tehnice</a>
         </div>
       </div>
 
@@ -84,16 +92,11 @@
       <div class="nav-item">
         <a href="/traduceri-bucuresti/" data-k="zone">Birouri</a>
         <div class="dropdown">
-          <a href="/traduceri-buzau/">Traduceri Buzău<small>Bd. Nicolae Bălcescu 2, Hotel Coroana</small></a>
-          <a href="/traduceri-bucuresti/">Traduceri București<small>Șos. Pipera 46F, clădirea SERICO</small></a>
-          <div class="sep"></div>
-          <a href="/traduceri-sector-2/">Sector 2 și Pipera</a>
-          <a href="/traduceri-sector-1/">Sector 1 și Băneasa</a>
-          <a href="/traduceri-otopeni/">Otopeni și nordul Ilfovului</a>
+          <a href="/traduceri-buzau/">Traduceri Buzău<small>Bd. Nicolae Bălcescu nr. 2, Hotel Coroana, parter</small></a>
+          <a href="/traduceri-bucuresti/">Traduceri București<small>Șos. Pipera nr. 46F, et. 1, birou 101, clădirea SERICO</small></a>
         </div>
       </div>
 
-      <a href="/preturi/" data-k="preturi">Prețuri</a>
       <a href="/blog/" data-k="blog">Blog</a>
       <a href="/contact/" data-k="contact">Contact</a>
     </nav>
@@ -116,20 +119,21 @@
   <div class="wrap">
     <div class="foot-grid">
       <div>
-        <div class="brand" style="margin-bottom:.8rem">
-          <span class="mark">GTS</span>
-          <span>GTS Company<small>Expertul tău în traduceri din 2004</small></span>
+        <div class="brand" style="margin-bottom:1rem">
+          <img src="/assets/img/gts-logo-alb.svg" alt="GTS Traduceri" width="555" height="338">
         </div>
-        <p style="max-width:34ch">Servicii profesionale de traduceri autorizate, legalizate și interpretariat, certificate ISO 9001:2015. Birouri în Buzău și București.</p>
+        <p style="max-width:34ch">Birou de traduceri autorizate, legalizate și interpretariat, certificat ISO 9001:2015. Birouri în Buzău și București, plus livrare prin curier în toată țara.</p>
       </div>
       <div>
         <h4>Servicii</h4>
         <ul>
           <li><a href="/traduceri-autorizate/">Traduceri autorizate</a></li>
           <li><a href="/traduceri-legalizate/">Traduceri legalizate</a></li>
-          <li><a href="/apostila-de-la-haga/">Apostila de la Haga</a></li>
-          <li><a href="/traduceri-tehnice/">Traduceri tehnice</a></li>
           <li><a href="/interpretariat/">Interpretariat</a></li>
+          <li><a href="/colationare/">Colaționare</a></li>
+          <li><a href="/legalizare/">Legalizare</a></li>
+          <li><a href="/apostila-de-la-haga/">Apostilă și supralegalizare</a></li>
+          <li><a href="/prelucrare-dtp/">Prelucrare DTP</a></li>
           <li><a href="/transcriere-audio-video/">Transcriere audio-video</a></li>
           <li><a href="/subtitrare-video/">Subtitrare video</a></li>
         </ul>
@@ -139,9 +143,6 @@
         <ul>
           <li><a href="/traduceri-buzau/">Traduceri Buzău</a></li>
           <li><a href="/traduceri-bucuresti/">Traduceri București</a></li>
-          <li><a href="/traduceri-sector-2/">Sector 2 și Pipera</a></li>
-          <li><a href="/traduceri-sector-1/">Sector 1 și Băneasa</a></li>
-          <li><a href="/traduceri-otopeni/">Otopeni și Ilfov nord</a></li>
         </ul>
       </div>
       <div>
@@ -149,7 +150,6 @@
         <ul>
           <li><a href="/despre-noi/">Despre noi</a></li>
           <li><a href="/acreditare-iso/">Acreditare ISO 9001</a></li>
-          <li><a href="/preturi/">Prețuri</a></li>
           <li><a href="/intrebari-frecvente/">Întrebări frecvente</a></li>
           <li><a href="/blog/">Blog</a></li>
           <li><a href="/contact/">Contact</a></li>
