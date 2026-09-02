@@ -330,6 +330,22 @@ footer a:hover{color:#fff}
 .mobile-bar .btn{flex:1;font-size:.95rem;padding:.8rem}
 .wa{background:#0F7B6C;color:#fff}
 
+/* ---------- Buton flotant WhatsApp ----------
+   Verdele e inchis fata de cel oficial WhatsApp, ca sa treaca contrastul AA
+   cu text alb (5,16:1). Pe mobil butonul exista deja in bara fixa de jos. */
+.wa-float{position:fixed;left:20px;bottom:20px;z-index:55;
+  display:inline-flex;align-items:center;gap:.55rem;
+  padding:.72rem 1.15rem;border-radius:999px;
+  background:#0F7B6C;color:#fff;border:1px solid #0B5F54;
+  font-family:var(--font);font-weight:600;font-size:.95rem;line-height:1;
+  text-decoration:none;
+  box-shadow:0 1px 0 rgba(255,255,255,.18) inset,0 8px 22px -8px rgba(26,36,46,.5);
+  transition:background .18s ease,transform .18s ease,box-shadow .18s ease}
+.wa-float:hover{background:#0C6A5D;color:#fff;transform:translateY(-2px);
+  box-shadow:0 1px 0 rgba(255,255,255,.18) inset,0 12px 28px -8px rgba(26,36,46,.55)}
+.wa-float:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
+.wa-float svg{flex:0 0 auto}
+
 /* ---------- Afirmatii de confirmat (doar in modul de verificare) ----------
    In productie clasa .review lipseste de pe <html>, deci textul apare normal. */
 .review-mode .tbc{background:#fff3cd;box-shadow:0 0 0 2px #fff3cd;border-bottom:2px dotted #b8860b;border-radius:2px}
@@ -378,11 +394,13 @@ footer a:hover{color:#fff}
     padding:.3rem 0 .3rem .8rem;min-width:0;border-left:2px solid var(--line);border-radius:0;margin-top:.4rem}
   .grid-3,.grid-2,.reviews,.grid-4,.two,.aside{grid-template-columns:1fr}
   .mobile-bar{display:flex}
+  .wa-float{display:none}
   body{padding-bottom:64px}
   .topbar .hide-sm{display:none}
   .foot-grid{grid-template-columns:1fr}
 }
-@media(prefers-reduced-motion:reduce){.js .reveal{opacity:1;transform:none;transition:none}*{scroll-behavior:auto}}
+@media(prefers-reduced-motion:reduce){.js .reveal{opacity:1;transform:none;transition:none}*{scroll-behavior:auto}
+  .wa-float{transition:none}.wa-float:hover{transform:none}}
 
 /* ---------- Blocul de rating pe paginile de birou ----------
    Nota reala din fisa Google a fiecarui birou, cu trimitere la sursa. */
