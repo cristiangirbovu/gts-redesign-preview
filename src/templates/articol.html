@@ -1,0 +1,29 @@
+---
+url: /blog/{{SLUG}}/
+title: {{TITLU}} | Blog GTS Traduceri
+desc: {{REZUMAT}}
+nav: blog
+---
+
+<section class="phero">
+  <div class="wrap">
+    <div class="crumbs"><a href="/">Acasă</a> <span>/</span> <a href="/blog/">Blog</a> <span>/</span> <span>{{TITLU}}</span></div>
+    <h1>{{TITLU}}</h1>
+  </div>
+</section>
+
+<section class="sec">
+  <div class="wrap layout">
+    <div class="prose reveal"{{LANGATTR}}>
+        {{CORP}}
+
+      <p class="inapoi"><a href="/blog/">&larr; Toate articolele</a></p>
+    </div>
+
+    <aside class="aside">
+      {{> form-aside}}
+    </aside>
+  </div>
+</section>
+
+{{> cta}}

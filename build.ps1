@@ -55,6 +55,28 @@ function Expand-Partials([string]$text) {
 $script:Urls  = @()
 $script:Built = 0
 
+# ---- articolele de blog, preluate de pe blog.gtstraduceri.ro ----
+# Se incarca inainte de paginile scrise de mana, pentru ca pagina /blog/
+# foloseste partiala generata {{> lista-articole}}.
+$ArtPath = Join-Path $SrcDir 'data\articole.json'
+$Articole = @()
+if (Test-Path $ArtPath) {
+  # Fara @() in jur: ConvertFrom-Json trimite tabloul ca un singur obiect, iar
+  # @(...) l-ar impacheta ca element unic si bucla ar rula o singura data.
+  $Articole = Get-Content $ArtPath -Raw -Encoding UTF8 | ConvertFrom-Json
+  $carduri = foreach ($a in $Articole) {
+    $eticheta = if ($a.limba -eq 'en') { '<span class="art-lang">EN</span>' } else { '' }
+    @"
+      <a class="card art-card" href="/blog/$($a.slug)/">
+        <h3>$($a.titlu)$eticheta</h3>
+        <p>$($a.rezumat)</p>
+      </a>
+"@
+  }
+  $Partials['lista-articole'] = "<div class=`"grid-3 reveal`">`n" + ($carduri -join "`n") + "`n    </div>"
+  $Partials['numar-articole'] = [string]$Articole.Count
+}
+
 function Render-Page([string]$raw, [string]$sourceName) {
   # front matter intre --- si ---
   $fm = [regex]::Match($raw, '^\s*---\s*\r?\n(.*?)\r?\n---\s*\r?\n(.*)$', $RXS)
@@ -143,7 +165,23 @@ if ((Test-Path $tplPath) -and (Test-Path $dataPath)) {
   }
 }
 
-# ---- 3. sitemap ----
+# ---- 3. articolele de blog, din sablon ----
+$artTpl = Join-Path $SrcDir 'templates\articol.html'
+if ((Test-Path $artTpl) -and $Articole.Count -gt 0) {
+  Write-Host "`nArticole de blog (din sablon):" -ForegroundColor Cyan
+  $tplA = Get-Content $artTpl -Raw -Encoding UTF8
+  foreach ($a in $Articole) {
+    $langAttr = if ($a.limba -eq 'en') { ' lang="en"' } else { '' }
+    $page = $tplA.Replace('{{SLUG}}', $a.slug).
+                  Replace('{{TITLU}}', $a.titlu).
+                  Replace('{{REZUMAT}}', $a.rezumat).
+                  Replace('{{LANGATTR}}', $langAttr).
+                  Replace('{{CORP}}', $a.corp)
+    Render-Page $page ("articol-" + $a.slug)
+  }
+}
+
+# ---- 4. sitemap ----
 $sm = '<?xml version="1.0" encoding="UTF-8"?>' + "`n" + '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">' + "`n"
 foreach ($u in ($script:Urls | Sort-Object -Unique)) { $sm += "  <url><loc>https://www.gtstraduceri.ro$u</loc></url>`n" }
 $sm += '</urlset>'

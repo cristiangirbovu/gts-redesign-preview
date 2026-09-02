@@ -330,6 +330,16 @@ footer a:hover{color:#fff}
 .mobile-bar .btn{flex:1;font-size:.95rem;padding:.8rem}
 .wa{background:#0F7B6C;color:#fff}
 
+/* ---------- Carduri de articol pe /blog/ ---------- */
+.art-card{display:block;text-decoration:none;color:inherit;transition:border-color .18s ease,box-shadow .18s ease,transform .18s ease}
+.art-card:hover{border-color:var(--accent);box-shadow:var(--shadow);transform:translateY(-2px)}
+.art-card h3{display:flex;align-items:baseline;gap:.5rem;flex-wrap:wrap}
+.art-card:hover h3{color:var(--accent-buton)}
+.art-lang{flex:0 0 auto;font-size:.66rem;font-weight:800;letter-spacing:.06em;
+  background:var(--hartie);border:1px solid var(--line);color:var(--text-secundar);
+  padding:.1rem .38rem;border-radius:4px}
+.prose .inapoi{margin-top:2rem;padding-top:1.2rem;border-top:1px solid var(--line)}
+
 /* ---------- Buton flotant WhatsApp ----------
    Verdele e inchis fata de cel oficial WhatsApp, ca sa treaca contrastul AA
    cu text alb (5,16:1). Pe mobil butonul exista deja in bara fixa de jos. */
