@@ -48,6 +48,27 @@
     revealAll();
   }
 
+  // Hartile Google se incarca doar dupa clic. Pana atunci pagina nu trimite
+  // nicio cerere catre Google, deci nu se pun cookies si nu e nevoie de banner.
+  document.querySelectorAll('.harta-cerere').forEach(function (cutie) {
+    var buton = cutie.querySelector('.harta-incarca');
+    if (!buton) return;
+    buton.addEventListener('click', function () {
+      var adresa = cutie.getAttribute('data-harta');
+      if (!adresa) return;
+      var cadru = document.createElement('iframe');
+      cadru.className = 'map';
+      cadru.setAttribute('loading', 'lazy');
+      cadru.setAttribute('referrerpolicy', 'no-referrer-when-downgrade');
+      cadru.setAttribute('title', cutie.getAttribute('data-titlu') || 'Hartă');
+      cadru.src = adresa;
+      cutie.parentNode.replaceChild(cadru, cutie);
+      // Mutam focalizarea pe harta, ca navigarea de la tastatura sa nu se piarda.
+      cadru.setAttribute('tabindex', '-1');
+      cadru.focus();
+    });
+  });
+
   // Butonul flotant de WhatsApp sta jos-dreapta, unde pe unele pagini ajunge
   // butonul de trimitere al formularului de ofertă. Cand cele doua dreptunghiuri
   // se suprapun, ridicam butonul flotant deasupra celui de trimitere.

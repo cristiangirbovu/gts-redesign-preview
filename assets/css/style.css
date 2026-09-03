@@ -288,6 +288,21 @@ footer .brand img{height:52px}
 .office a:hover{color:var(--blue-600)}
 .map{border:0;width:100%;height:260px;border-radius:var(--radius);filter:grayscale(.25)}
 
+/* ---------- Harta se incarca doar la cerere ----------
+   Un iframe Google incarcat automat ar pune cookies la fiecare vizita, ceea ce
+   ar obliga la un banner de consimtamant. Asa, pagina nu cere nimic de la
+   Google pana cand vizitatorul apasa butonul, deci nu e nevoie de banner. */
+.harta-cerere{width:100%;min-height:260px;box-sizing:border-box;
+  border:1px dashed var(--line);border-radius:var(--radius);background:var(--hartie);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:.6rem;text-align:center;padding:1.6rem}
+.harta-cerere .harta-pin{color:var(--accent);flex:0 0 auto}
+.harta-cerere .harta-loc{margin:0;font-weight:700;color:var(--cerneala)}
+.harta-cerere .harta-nota{margin:0;font-size:.88rem;line-height:1.5;color:var(--text-secundar);max-width:46ch}
+.harta-cerere .btn{margin-top:.2rem}
+.harta-cerere .harta-extern{font-size:.88rem;color:var(--blue-600);text-decoration:underline}
+.harta-cerere .harta-extern:hover{color:var(--accent-buton)}
+
 /* ---------- FAQ ---------- */
 .faq{display:grid;gap:.6rem}
 .faq details{background:#fff;border:1px solid var(--line);border-radius:12px;padding:.9rem 1.1rem}
@@ -329,6 +344,7 @@ footer a:hover{color:#fff}
   background:rgba(255,255,255,.96);backdrop-filter:blur(8px);border-top:1px solid var(--line);box-shadow:0 -6px 20px -10px rgba(0,0,0,.25)}
 .mobile-bar .btn{flex:1;font-size:.95rem;padding:.8rem}
 .wa{background:#0F7B6C;color:#fff}
+.mobile-bar .wa .wa-marca{flex:0 0 18px;width:18px;height:18px;display:block}
 
 /* ---------- Carduri de articol pe /blog/ ---------- */
 .art-card{display:block;text-decoration:none;color:inherit;transition:border-color .18s ease,box-shadow .18s ease,transform .18s ease}
@@ -343,27 +359,26 @@ footer a:hover{color:#fff}
 /* ---------- Buton flotant WhatsApp ----------
    Verdele e inchis fata de cel oficial WhatsApp, ca sa treaca contrastul AA
    cu text alb (5,16:1). Pe mobil butonul exista deja in bara fixa de jos. */
+/* Metrici in pixeli intregi si NICIO animatie continua: o animatie infinita
+   promoveaza butonul pe un strat compus, iar textul isi pierde netezirea
+   pe subpixeli si pare pixelat. Din acelasi motiv, hoverul schimba doar
+   culoarea si umbra, fara transform. */
 .wa-float{position:fixed;right:24px;bottom:24px;z-index:55;
-  display:inline-flex;align-items:center;gap:.6rem;
-  padding:.92rem 1.45rem;border-radius:999px;
-  background:#0F7B6C;color:#fff;border:2px solid #fff;
-  font-family:var(--font);font-weight:700;font-size:1.02rem;line-height:1;
-  letter-spacing:.01em;text-decoration:none;
-  box-shadow:0 1px 0 rgba(255,255,255,.22) inset,0 10px 26px -6px rgba(15,123,108,.55),0 0 0 1px rgba(11,95,84,.5);
-  transition:background .18s ease,transform .18s ease,box-shadow .18s ease,bottom .22s ease}
-.wa-float:hover{background:#0C6A5D;color:#fff;transform:translateY(-3px);
-  box-shadow:0 1px 0 rgba(255,255,255,.22) inset,0 16px 34px -8px rgba(15,123,108,.6),0 0 0 1px rgba(11,95,84,.5)}
+  display:inline-flex;align-items:center;gap:10px;
+  height:52px;padding:0 22px;border-radius:26px;
+  background:#0F7B6C;color:#fff;border:0;
+  font-family:var(--font);font-size:15px;font-weight:600;line-height:1;
+  letter-spacing:.005em;white-space:nowrap;text-decoration:none;
+  box-shadow:0 8px 20px -8px rgba(26,36,46,.5),0 0 0 1px rgba(11,95,84,.45);
+  transition:background .18s ease,box-shadow .18s ease,bottom .22s ease}
+.wa-float:hover{background:#0C6A5D;color:#fff;
+  box-shadow:0 12px 26px -8px rgba(26,36,46,.55),0 0 0 1px rgba(11,95,84,.55)}
+.wa-float:active{background:#0A5A4F}
 .wa-float:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
-.wa-float svg{flex:0 0 auto}
-/* Halou care pulseaza discret, ca sa se observe fara sa distraga. */
-.wa-float::before{content:"";position:absolute;inset:-2px;border-radius:999px;
-  border:2px solid #0F7B6C;opacity:0;pointer-events:none;
-  animation:wa-puls 2.8s ease-out infinite}
-@keyframes wa-puls{
-  0%{transform:scale(1);opacity:.55}
-  70%{transform:scale(1.28);opacity:0}
-  100%{transform:scale(1.28);opacity:0}
-}
+/* Marca sta intr-o cutie proprie de dimensiune fixa, centrata pe verticala
+   fata de inaltimea butonului, nu fata de cutia textului, care e mai scunda. */
+.wa-float .wa-marca{flex:0 0 20px;width:20px;height:20px;display:block}
+.wa-float .wa-text{display:block}
 /* Se ridica atunci cand ar acoperi butonul de trimitere al formularului.
    Clasa e pusa din JS, dupa masurarea reala a celor doua dreptunghiuri. */
 .wa-float.ridicat{bottom:calc(24px + var(--wa-salt, 72px))}
@@ -422,7 +437,7 @@ footer a:hover{color:#fff}
   .foot-grid{grid-template-columns:1fr}
 }
 @media(prefers-reduced-motion:reduce){.js .reveal{opacity:1;transform:none;transition:none}*{scroll-behavior:auto}
-  .wa-float{transition:none}.wa-float:hover{transform:none}.wa-float::before{animation:none;display:none}}
+  .wa-float{transition:none}}
 
 /* ---------- Blocul de rating pe paginile de birou ----------
    Nota reala din fisa Google a fiecarui birou, cu trimitere la sursa. */
