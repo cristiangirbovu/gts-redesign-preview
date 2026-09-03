@@ -88,13 +88,13 @@ section{scroll-margin-top:80px}
 
 /* ---------- Header / Nav ---------- */
 header.site{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.94);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
-.nav{display:flex;align-items:center;justify-content:space-between;min-height:66px}
+.nav{display:flex;align-items:center;justify-content:space-between;min-height:88px}
 /* Logotipul: fişierele originale din pachetul de brand, folosite ca atare.
    Varianta pe cerneală în antet, varianta albă în subsol. */
 .brand{display:inline-flex;align-items:center;flex:0 0 auto}
-.brand img{height:46px;width:auto;display:block}
+.brand img{height:69px;width:auto;display:block}
 footer .brand img{height:52px}
-@media(max-width:720px){.brand img{height:38px}}
+@media(max-width:720px){.brand img{height:57px}.nav{min-height:76px}}
 .nav-links{display:flex;align-items:center;gap:1.6rem}
 .nav-links > a,.nav-item > a{font-weight:600;color:var(--text);font-size:.97rem;display:inline-flex;align-items:center;gap:.3rem}
 .nav-links a:hover{color:var(--blue-600)}
@@ -216,7 +216,7 @@ footer .brand img{height:52px}
 .prose a:not(.btn){color:var(--blue-600);font-weight:600;border-bottom:1px solid var(--line)}
 .prose a:not(.btn):hover{border-color:var(--blue-400)}
 .layout{display:grid;grid-template-columns:1fr 360px;gap:2.6rem;align-items:start}
-.aside{position:sticky;top:88px;display:grid;gap:1rem}
+.aside{position:sticky;top:108px;display:grid;gap:1rem}
 
 /* ---------- Cards ---------- */
 .grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem}
@@ -343,18 +343,30 @@ footer a:hover{color:#fff}
 /* ---------- Buton flotant WhatsApp ----------
    Verdele e inchis fata de cel oficial WhatsApp, ca sa treaca contrastul AA
    cu text alb (5,16:1). Pe mobil butonul exista deja in bara fixa de jos. */
-.wa-float{position:fixed;left:20px;bottom:20px;z-index:55;
-  display:inline-flex;align-items:center;gap:.55rem;
-  padding:.72rem 1.15rem;border-radius:999px;
-  background:#0F7B6C;color:#fff;border:1px solid #0B5F54;
-  font-family:var(--font);font-weight:600;font-size:.95rem;line-height:1;
-  text-decoration:none;
-  box-shadow:0 1px 0 rgba(255,255,255,.18) inset,0 8px 22px -8px rgba(26,36,46,.5);
-  transition:background .18s ease,transform .18s ease,box-shadow .18s ease}
-.wa-float:hover{background:#0C6A5D;color:#fff;transform:translateY(-2px);
-  box-shadow:0 1px 0 rgba(255,255,255,.18) inset,0 12px 28px -8px rgba(26,36,46,.55)}
+.wa-float{position:fixed;right:24px;bottom:24px;z-index:55;
+  display:inline-flex;align-items:center;gap:.6rem;
+  padding:.92rem 1.45rem;border-radius:999px;
+  background:#0F7B6C;color:#fff;border:2px solid #fff;
+  font-family:var(--font);font-weight:700;font-size:1.02rem;line-height:1;
+  letter-spacing:.01em;text-decoration:none;
+  box-shadow:0 1px 0 rgba(255,255,255,.22) inset,0 10px 26px -6px rgba(15,123,108,.55),0 0 0 1px rgba(11,95,84,.5);
+  transition:background .18s ease,transform .18s ease,box-shadow .18s ease,bottom .22s ease}
+.wa-float:hover{background:#0C6A5D;color:#fff;transform:translateY(-3px);
+  box-shadow:0 1px 0 rgba(255,255,255,.22) inset,0 16px 34px -8px rgba(15,123,108,.6),0 0 0 1px rgba(11,95,84,.5)}
 .wa-float:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
 .wa-float svg{flex:0 0 auto}
+/* Halou care pulseaza discret, ca sa se observe fara sa distraga. */
+.wa-float::before{content:"";position:absolute;inset:-2px;border-radius:999px;
+  border:2px solid #0F7B6C;opacity:0;pointer-events:none;
+  animation:wa-puls 2.8s ease-out infinite}
+@keyframes wa-puls{
+  0%{transform:scale(1);opacity:.55}
+  70%{transform:scale(1.28);opacity:0}
+  100%{transform:scale(1.28);opacity:0}
+}
+/* Se ridica atunci cand ar acoperi butonul de trimitere al formularului.
+   Clasa e pusa din JS, dupa masurarea reala a celor doua dreptunghiuri. */
+.wa-float.ridicat{bottom:calc(24px + var(--wa-salt, 72px))}
 
 /* ---------- Afirmatii de confirmat (doar in modul de verificare) ----------
    In productie clasa .review lipseste de pe <html>, deci textul apare normal. */
@@ -397,7 +409,7 @@ footer a:hover{color:#fff}
   .form-card{padding:1.2rem}
   .nav-links,.nav-cta .nav-phone{display:none}
   .burger{display:block}
-  .nav-links.open{display:flex;position:absolute;top:66px;left:0;right:0;flex-direction:column;align-items:stretch;
+  .nav-links.open{display:flex;position:absolute;top:77px;left:0;right:0;flex-direction:column;align-items:stretch;
     background:#fff;padding:1rem 20px;gap:.9rem;border-bottom:1px solid var(--line);box-shadow:var(--shadow);max-height:75vh;overflow:auto}
   .nav-links.open .nav-item > a::after{display:none}
   .nav-links.open .dropdown{position:static;opacity:1;visibility:visible;transform:none;box-shadow:none;border:0;
@@ -410,7 +422,7 @@ footer a:hover{color:#fff}
   .foot-grid{grid-template-columns:1fr}
 }
 @media(prefers-reduced-motion:reduce){.js .reveal{opacity:1;transform:none;transition:none}*{scroll-behavior:auto}
-  .wa-float{transition:none}.wa-float:hover{transform:none}}
+  .wa-float{transition:none}.wa-float:hover{transform:none}.wa-float::before{animation:none;display:none}}
 
 /* ---------- Blocul de rating pe paginile de birou ----------
    Nota reala din fisa Google a fiecarui birou, cu trimitere la sursa. */

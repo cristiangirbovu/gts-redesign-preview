@@ -48,6 +48,64 @@
     revealAll();
   }
 
+  // Butonul flotant de WhatsApp sta jos-dreapta, unde pe unele pagini ajunge
+  // butonul de trimitere al formularului de ofertă. Cand cele doua dreptunghiuri
+  // se suprapun, ridicam butonul flotant deasupra celui de trimitere.
+  var waFloat = document.querySelector('.wa-float');
+  if (waFloat) {
+    var trimite = document.querySelector('.form-card button[type=submit], .form-card button, .form-card [type=submit]');
+    if (trimite) {
+      var inAsteptare = false;
+      var MARJA = 12, JOS = 24, DREAPTA = 24; // aceleasi valori ca in CSS
+      var potrivesteWa = function () {
+        inAsteptare = false;
+        // Calculam pozitia de baza din viewport, nu din dreptunghiul curent.
+        // Altfel, cand butonul e deja ridicat, masuram pozitia corectata si
+        // decizia oscileaza intre ridicat si coborat.
+        var r = waFloat.getBoundingClientRect();
+        var t = trimite.getBoundingClientRect();
+        var bazaJos = window.innerHeight - JOS;
+        var bazaSus = bazaJos - r.height;
+        var bazaDreapta = window.innerWidth - DREAPTA;
+        var bazaStanga = bazaDreapta - r.width;
+        var seSuprapun = !(bazaDreapta < t.left - MARJA || bazaStanga > t.right + MARJA ||
+                           bazaJos < t.top - MARJA || bazaSus > t.bottom + MARJA);
+        if (seSuprapun) {
+          waFloat.style.setProperty('--wa-salt', Math.ceil(bazaJos - t.top + MARJA) + 'px');
+          waFloat.classList.add('ridicat');
+        } else {
+          waFloat.classList.remove('ridicat');
+        }
+      };
+      // Temporizator, nu requestAnimationFrame: acesta din urma nu se executa
+      // deloc cand pagina nu e vizibila, iar butonul ar ramane nepozitionat.
+      var programeaza = function () {
+        if (inAsteptare) return;
+        inAsteptare = true;
+        setTimeout(potrivesteWa, 0);
+      };
+      programeaza();
+      window.addEventListener('scroll', programeaza, { passive: true });
+      window.addEventListener('resize', programeaza);
+      // Pozitiile se schimba dupa ce se incarca fonturile si imaginile, deci
+      // remasuram si atunci, altfel verificarea de la inceput ramane invalida.
+      window.addEventListener('load', function () {
+        programeaza();
+        // Sectiunile intra cu o animatie de translatie, deci pozitiile se mai
+        // schimba dupa 'load'. Remasuram si dupa ce se aseaza.
+        setTimeout(programeaza, 400);
+        setTimeout(programeaza, 1200);
+      });
+      // Ignoram tranzitia proprie a butonului, altfel se declanseaza singur la nesfarsit.
+      document.addEventListener('transitionend', function (ev) {
+        if (ev.target === waFloat) return;
+        programeaza();
+      }, true);
+      if (document.fonts && document.fonts.ready) { document.fonts.ready.then(programeaza); }
+      if ('ResizeObserver' in window) { new ResizeObserver(programeaza).observe(document.body); }
+    }
+  }
+
   // "Cere ofertă" din header duce la formular, oriunde s-ar afla
   document.querySelectorAll('a[href="#oferta"]').forEach(function (a) {
     a.addEventListener('click', function (ev) {
