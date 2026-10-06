@@ -48,6 +48,15 @@
     revealAll();
   }
 
+  // Pe pagina de domenii, o adresa cu ancora (ex. #tehnice) deschide direct domeniul respectiv.
+  function deschideDinAncora() {
+    if (!location.hash) return;
+    var el = document.getElementById(location.hash.slice(1));
+    if (el && el.tagName === 'DETAILS') { el.open = true; el.scrollIntoView({ block: 'start' }); }
+  }
+  deschideDinAncora();
+  window.addEventListener('hashchange', deschideDinAncora);
+
   // Hartile Google se incarca doar dupa clic. Pana atunci pagina nu trimite
   // nicio cerere catre Google, deci nu se pun cookies si nu e nevoie de banner.
   document.querySelectorAll('.harta-cerere').forEach(function (cutie) {

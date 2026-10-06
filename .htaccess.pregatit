@@ -19,9 +19,9 @@ RewriteRule ^(.*)$ https://www.gtstraduceri.ro/$1 [R=301,L]
 # 301 catre echivalentul lor nou. Fara asta, pozitiile actuale se pierd.
 
 Redirect 301 /page1.html            /traduceri-autorizate/
-Redirect 301 /page2.html            /preturi/
-Redirect 301 /page3.html            /traduceri-buzau/
-Redirect 301 /page4.html            /traduceri-bucuresti/
+Redirect 301 /page2.html            /intrebari-frecvente/
+Redirect 301 /page3.html            /contact/
+Redirect 301 /page4.html            /contact/
 Redirect 301 /page5.html            /intrebari-frecvente/
 Redirect 301 /servicii.html         /traduceri-autorizate/
 Redirect 301 /faq.html              /intrebari-frecvente/

@@ -88,13 +88,13 @@ section{scroll-margin-top:80px}
 
 /* ---------- Header / Nav ---------- */
 header.site{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.94);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
-.nav{display:flex;align-items:center;justify-content:space-between;min-height:88px}
+.nav{display:flex;align-items:center;justify-content:space-between;min-height:100px}
 /* Logotipul: fişierele originale din pachetul de brand, folosite ca atare.
    Varianta pe cerneală în antet, varianta albă în subsol. */
 .brand{display:inline-flex;align-items:center;flex:0 0 auto}
-.brand img{height:69px;width:auto;display:block}
+.brand img{height:83px;width:auto;display:block}
 footer .brand img{height:52px}
-@media(max-width:720px){.brand img{height:57px}.nav{min-height:76px}}
+@media(max-width:720px){.brand img{height:68px}.nav{min-height:86px}}
 .nav-links{display:flex;align-items:center;gap:1.6rem}
 .nav-links > a,.nav-item > a{font-weight:600;color:var(--text);font-size:.97rem;display:inline-flex;align-items:center;gap:.3rem}
 .nav-links a:hover{color:var(--blue-600)}
@@ -135,6 +135,14 @@ footer .brand img{height:52px}
   padding:.6rem 1.3rem;border-radius:999px;margin-bottom:1.35rem;line-height:1.25}
 .hero .eyebrow .dot{width:10px;height:10px;border-radius:50%;background:var(--gold);flex:0 0 auto;
   box-shadow:0 0 0 3px rgba(162,96,58,.28)}
+/* Certificarea si experienta stau alaturi; cand nu incap pe un rand, se aseaza una sub alta. */
+.hero .eyebrows{display:flex;flex-wrap:wrap;align-items:flex-start;gap:.6rem;margin-bottom:1.35rem}
+.hero .eyebrows .eyebrow{margin-bottom:0}
+
+/* ---------- Despre noi, pe prima pagina ---------- */
+.despre-text{max-width:760px;margin:0 auto;text-align:center;font-size:1.08rem;color:var(--text)}
+.despre-text p+p{margin-top:.9rem}
+.standarde-head{margin-top:3.2rem}
 .hero h1{color:#fff;font-size:clamp(1.9rem,4.2vw,3.05rem);margin-bottom:.9rem}
 .hero h1 .hl{color:var(--accent-deschis)}
 .hero p.lead{font-size:clamp(1.05rem,1.7vw,1.2rem);color:var(--pe-fond);max-width:40ch;margin-bottom:1.5rem}
@@ -286,6 +294,12 @@ footer .brand img{height:52px}
 .office li{display:flex;gap:.6rem;align-items:flex-start}
 .office li svg{flex:0 0 18px;color:var(--blue-400);margin-top:.15rem}
 .office a:hover{color:var(--blue-600)}
+/* Nota Google a fiecarui birou, mutata de pe fostele pagini de birou. */
+.office-rating{display:flex;align-items:center;flex-wrap:wrap;gap:.35rem;margin:0 0 1rem;font-size:.95rem;color:var(--text-secundar)}
+.office-rating .stars{color:var(--accent);font-size:1.05rem;line-height:1}
+.office-rating b{color:var(--cerneala);font-weight:700}
+.office-rating .sep{color:var(--line)}
+.office-rating a{color:var(--blue-600);text-decoration:underline}
 .map{border:0;width:100%;height:260px;border-radius:var(--radius);filter:grayscale(.25)}
 
 /* ---------- Harta se incarca doar la cerere ----------
@@ -311,6 +325,12 @@ footer .brand img{height:52px}
 .faq summary::after{content:"+";color:var(--blue-600);font-weight:800;font-size:1.2rem;line-height:1}
 .faq details[open] summary::after{content:"\2013"}
 .faq details p{margin-top:.6rem;font-size:.94rem;color:var(--muted)}
+/* Domeniile de traducere: titluri mai mari, descrierea = lista de documente, deci citibila. */
+.faq.domenii details{padding:1.05rem 1.3rem;scroll-margin-top:120px}
+.faq.domenii summary{font-size:1.06rem}
+.faq.domenii details[open]{border-color:var(--accent-deschis)}
+.faq.domenii details p{font-size:1rem;color:var(--text);line-height:1.65}
+.faq summary:focus-visible{outline:3px solid var(--accent);outline-offset:4px;border-radius:6px}
 
 /* ---------- CTA band ---------- */
 .cta{background:linear-gradient(120deg,var(--blue-700),var(--blue-900));color:#fff;border-radius:var(--radius);
@@ -323,6 +343,13 @@ footer .brand img{height:52px}
 .rel{display:flex;flex-wrap:wrap;gap:.55rem}
 .rel a{background:#fff;border:1px solid var(--line);border-radius:999px;padding:.45rem .9rem;font-size:.88rem;font-weight:600;color:var(--blue-700)}
 .rel a:hover{border-color:var(--blue-400);background:var(--soft)}
+
+/* Lista limbilor: coloane care se rearanjeaza singure dupa latime, fara ruperi in interiorul unui nume. */
+.prose ul.limbi-lista{list-style:none;padding:0;margin:1.2rem 0 2rem;columns:3 11rem;column-gap:1.6rem}
+.prose ul.limbi-lista li{break-inside:avoid;position:relative;padding:.38rem 0 .38rem 1.15rem;margin:0;
+  border-bottom:1px solid var(--line);font-weight:600;color:var(--cerneala)}
+.prose ul.limbi-lista li::before{content:"";position:absolute;left:0;top:50%;width:6px;height:6px;margin-top:-3px;
+  border-radius:50%;background:var(--accent)}
 
 /* ---------- Footer ---------- */
 /* Pe fond închis totul se declară explicit, ca nicio regulă globală de text
@@ -417,6 +444,7 @@ footer a:hover{color:#fff}
   /* Pe mobil formularul trebuie sa vina cat mai sus, deci compactam zona de deasupra lui */
   .hero .wrap{padding-top:1.4rem;padding-bottom:1.8rem;gap:1.3rem}
   .hero .eyebrow{margin-bottom:.9rem}
+  .hero .eyebrows{margin-bottom:.9rem}
   .hero p.lead{margin-bottom:1rem}
   .hero .chips{gap:.5rem 1rem;margin-bottom:0;font-size:.86rem}
   .hero .chips span:nth-child(n+3){display:none}
