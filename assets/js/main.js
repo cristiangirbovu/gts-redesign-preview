@@ -136,7 +136,7 @@
     }
   }
 
-  // "Cere ofertă" din header duce la formular, oriunde s-ar afla
+  // "Solicitați ofertă" din header duce la formular, oriunde s-ar afla
   document.querySelectorAll('a[href="#oferta"]').forEach(function (a) {
     a.addEventListener('click', function (ev) {
       var target = document.getElementById('oferta');

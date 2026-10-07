@@ -54,7 +54,8 @@ h1,h2,h3,h4{color:var(--ink);line-height:1.2;letter-spacing:-.005em;font-weight:
 /* rigla de sub titlurile de secţiune, semnătura vizuală a mărcii */
 .rigla::after{content:"";display:block;width:52px;height:2px;background:var(--accent);margin-top:.85rem}
 .sec-head:not(.left) .rigla::after{margin-left:auto;margin-right:auto}
-section{scroll-margin-top:80px}
+section{scroll-margin-top:124px}
+#oferta{scroll-margin-top:132px}
 .sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 
 /* ---------- Buttons ---------- */
@@ -88,13 +89,16 @@ section{scroll-margin-top:80px}
 
 /* ---------- Header / Nav ---------- */
 header.site{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.94);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
-.nav{display:flex;align-items:center;justify-content:space-between;min-height:100px}
+.nav{display:flex;align-items:center;justify-content:space-between;min-height:116px}
 /* Logotipul: fişierele originale din pachetul de brand, folosite ca atare.
    Varianta pe cerneală în antet, varianta albă în subsol. */
 .brand{display:inline-flex;align-items:center;flex:0 0 auto}
-.brand img{height:83px;width:auto;display:block}
+.brand img{height:100px;width:auto;display:block}
 footer .brand img{height:52px}
-@media(max-width:720px){.brand img{height:68px}.nav{min-height:86px}}
+@media(max-width:720px){.brand img{height:82px}.nav{min-height:98px}}
+/* Cu logo-ul de 100 px, pe ecranele mici de desktop meniul s-ar inghesui intre logo si butoane.
+   Numarul din antet dispare aici: ambele numere raman vizibile in bara de sus. */
+@media(max-width:1080px){.nav-cta .nav-phone{display:none}}
 .nav-links{display:flex;align-items:center;gap:1.6rem}
 .nav-links > a,.nav-item > a{font-weight:600;color:var(--text);font-size:.97rem;display:inline-flex;align-items:center;gap:.3rem}
 .nav-links a:hover{color:var(--blue-600)}
@@ -224,7 +228,7 @@ footer .brand img{height:52px}
 .prose a:not(.btn){color:var(--blue-600);font-weight:600;border-bottom:1px solid var(--line)}
 .prose a:not(.btn):hover{border-color:var(--blue-400)}
 .layout{display:grid;grid-template-columns:1fr 360px;gap:2.6rem;align-items:start}
-.aside{position:sticky;top:108px;display:grid;gap:1rem}
+.aside{position:sticky;top:136px;display:grid;gap:1rem}
 
 /* ---------- Cards ---------- */
 .grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem}
@@ -326,7 +330,7 @@ footer .brand img{height:52px}
 .faq details[open] summary::after{content:"\2013"}
 .faq details p{margin-top:.6rem;font-size:.94rem;color:var(--muted)}
 /* Domeniile de traducere: titluri mai mari, descrierea = lista de documente, deci citibila. */
-.faq.domenii details{padding:1.05rem 1.3rem;scroll-margin-top:120px}
+.faq.domenii details{padding:1.05rem 1.3rem;scroll-margin-top:132px}
 .faq.domenii summary{font-size:1.06rem}
 .faq.domenii details[open]{border-color:var(--accent-deschis)}
 .faq.domenii details p{font-size:1rem;color:var(--text);line-height:1.65}
@@ -452,7 +456,7 @@ footer a:hover{color:#fff}
   .form-card{padding:1.2rem}
   .nav-links,.nav-cta .nav-phone{display:none}
   .burger{display:block}
-  .nav-links.open{display:flex;position:absolute;top:77px;left:0;right:0;flex-direction:column;align-items:stretch;
+  .nav-links.open{display:flex;position:absolute;top:99px;left:0;right:0;flex-direction:column;align-items:stretch;
     background:#fff;padding:1rem 20px;gap:.9rem;border-bottom:1px solid var(--line);box-shadow:var(--shadow);max-height:75vh;overflow:auto}
   .nav-links.open .nav-item > a::after{display:none}
   .nav-links.open .dropdown{position:static;opacity:1;visibility:visible;transform:none;box-shadow:none;border:0;
