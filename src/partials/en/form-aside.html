@@ -1,0 +1,60 @@
+<div class="form-card flat" id="oferta">
+  <h2>Request a quote</h2>
+  <p class="sub">Attach your document and receive a price quote and delivery time within 2 hours.</p>
+  <form action="https://formsubmit.co/gts_trad@yahoo.com" method="POST" enctype="multipart/form-data" target="_blank">
+    <input type="hidden" name="_subject" value="Cerere Traduceri - Formular Website">
+    <input type="hidden" name="_captcha" value="false">
+    <input type="hidden" name="_template" value="table">
+    <input type="hidden" name="_next" value="https://www.gtstraduceri.ro/en/thank-you/">
+    <input type="text" name="_honey" style="display:none">
+    <input type="hidden" name="_autoresponse" value="Thank you for your request! Our team will contact you as soon as possible.">
+
+    <div class="field">
+      <label for="a-name">Full name *</label>
+      <input type="text" id="a-name" name="Nume_Complet" required autocomplete="name">
+    </div>
+    <div class="two">
+      <div class="field">
+        <label for="a-email">Email *</label>
+        <input type="email" id="a-email" name="email" required autocomplete="email">
+      </div>
+      <div class="field">
+        <label for="a-phone">Phone number</label>
+        <input type="tel" id="a-phone" name="Telefon" autocomplete="tel">
+      </div>
+    </div>
+    <div class="field">
+      <label for="a-serv">Service type *</label>
+      <select id="a-serv" name="Tip_Serviciu" required>
+        <option value="">Select service</option>
+        <option value="Traduceri Autorizate">Authorized translations</option>
+        <option value="Traduceri Legalizate">Legalized translations</option>
+        <option value="Interpretariat">Interpretation</option>
+        <option value="Colaționare">Collation</option>
+        <option value="Apostilă/Supralegalizare Camera Notarilor Publici, Viză MAE / Ambasadă">Apostille / Superlegalization</option>
+        <option value="Prelucrare DTP">DTP processing</option>
+        <option value="Transcriere Audio-Video">Audio-video transcription</option>
+        <option value="Subtitrare Video">Video subtitling</option>
+      </select>
+    </div>
+    <div class="field">
+      <label for="a-msg">Details (optional)</label>
+      <textarea id="a-msg" name="Mesaj" rows="2" placeholder="E.g. I need a legalized translation, urgent deadline..."></textarea>
+    </div>
+
+    <div class="field">
+      <label>Attach document</label>
+      <label class="file" for="a-doc">
+        <b>Choose a file</b>
+        <small>PDF, DOC, DOCX, JPG, PNG (max 10MB)</small>
+        <input type="file" id="a-doc" name="attachment" accept=".pdf,.doc,.docx,.jpg,.jpeg,.png,.txt">
+      </label>
+    </div>
+    <label class="consent">
+      <input type="checkbox" name="Acord_Confidentialitate" required>
+      <span>I agree with the <a href="/en/privacy/" target="_blank">privacy policy</a>.</span>
+    </label>
+    <button type="submit" class="btn btn-primary btn-block">Send request</button>
+    <p class="form-note">Or call us directly: <a href="tel:+40742067006" style="color:var(--blue-700);font-weight:700">+40 742 067 006</a></p>
+  </form>
+</div>

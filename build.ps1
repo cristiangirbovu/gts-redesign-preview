@@ -29,6 +29,11 @@ $SrcDir   = Join-Path $Root 'src'
 $PagesDir = Join-Path $SrcDir 'pages'
 $PartDir  = Join-Path $SrcDir 'partials'
 $Layout   = Get-Content (Join-Path $SrcDir 'layout.html') -Raw -Encoding UTF8
+# Versiunea in engleza: sablon propriu (src/layout.en.html) si partiale proprii (src/partials/en/).
+# O pagina e in engleza daca are "lang: en" in front matter.
+$LayoutEnPath = Join-Path $SrcDir 'layout.en.html'
+$LayoutEn = $null
+if (Test-Path $LayoutEnPath) { $LayoutEn = Get-Content $LayoutEnPath -Raw -Encoding UTF8 }
 $Utf8     = New-Object System.Text.UTF8Encoding($false)
 $RXS      = [System.Text.RegularExpressions.RegexOptions]::Singleline
 
@@ -39,13 +44,23 @@ if (Test-Path $PartDir) {
     $Partials[$_.BaseName] = Get-Content $_.FullName -Raw -Encoding UTF8
   }
 }
-function Expand-Partials([string]$text) {
+# Partialele in engleza NU cad inapoi pe cele romanesti: o partiala lipsa ar baga
+# text romanesc intr-o pagina englezeasca, deci e semnalata ca avertisment.
+$PartialsEn = @{}
+$PartDirEn = Join-Path $PartDir 'en'
+if (Test-Path $PartDirEn) {
+  Get-ChildItem $PartDirEn -Filter *.html | ForEach-Object {
+    $PartialsEn[$_.BaseName] = Get-Content $_.FullName -Raw -Encoding UTF8
+  }
+}
+function Expand-Partials([string]$text, [hashtable]$table) {
+  if ($null -eq $table) { $table = $Partials }
   for ($i = 0; $i -lt 4; $i++) {
     if ($text -notmatch '\{\{>\s*[\w-]+\s*\}\}') { break }
     $text = [regex]::Replace($text, '\{\{>\s*([\w-]+)\s*\}\}', {
       param($m)
       $k = $m.Groups[1].Value
-      if ($Partials.ContainsKey($k)) { return $Partials[$k] }
+      if ($table.ContainsKey($k)) { return $table[$k] }
       Write-Warning "  partial lipsa: $k"
       return ''
     })
@@ -99,7 +114,15 @@ function Render-Page([string]$raw, [string]$sourceName) {
   $url = $meta['url']
   if ([string]::IsNullOrWhiteSpace($url)) { Write-Warning "  fara 'url': $sourceName (sarit)"; return }
 
+  $lang = 'ro'
+  if (-not [string]::IsNullOrWhiteSpace($meta['lang'])) { $lang = $meta['lang'] }
   $html = $Layout
+  $tabel = $Partials
+  if ($lang -eq 'en') {
+    if ($null -eq $LayoutEn) { Write-Warning "  lipseste layout.en.html: $sourceName (sarit)"; return }
+    $html = $LayoutEn
+    $tabel = $PartialsEn
+  }
   $html = $html.Replace('{{CONTENT}}', $body.Trim())
   $html = $html.Replace('{{HEAD}}',    $head)
   $html = $html.Replace('{{TITLE}}',   $meta['title'])
@@ -115,7 +138,22 @@ function Render-Page([string]$raw, [string]$sourceName) {
     $html = $html.Replace('{{REVIEWBAR}}', '')
   }
 
-  $html = Expand-Partials $html
+  $html = Expand-Partials $html $tabel
+
+  # Perechea in cealalta limba ("alt: /en/..." sau "alt: /..."): butonul RO/EN duce
+  # la ea, iar etichetele hreflang ii spun lui Google ca paginile sunt traduceri.
+  # Fara pereche, butonul duce la prima pagina a celeilalte limbi si nu se pun hreflang.
+  $alt = $meta['alt']
+  $hreflang = ''
+  if ([string]::IsNullOrWhiteSpace($alt)) {
+    if ($lang -eq 'en') { $alt = '/' } else { $alt = '/en/' }
+  } else {
+    if ($lang -eq 'en') { $roUrl = $alt; $enUrl = $url } else { $roUrl = $url; $enUrl = $alt }
+    $hreflang = '<link rel="alternate" hreflang="ro" href="https://www.gtstraduceri.ro' + $roUrl + '">' + "`n" +
+                '<link rel="alternate" hreflang="en" href="https://www.gtstraduceri.ro' + $enUrl + '">' + "`n" +
+                '<link rel="alternate" hreflang="x-default" href="https://www.gtstraduceri.ro' + $roUrl + '">'
+  }
+  $html = $html.Replace('{{ALT}}', $alt).Replace('{{HREFLANG}}', $hreflang)
 
   $nav = $meta['nav']
   if (-not [string]::IsNullOrWhiteSpace($nav)) {

@@ -23,7 +23,7 @@
       var b = fi.closest('.file').querySelector('b');
       if (!b) return;
       if (fi.files.length === 1) { b.textContent = fi.files[0].name; }
-      else if (fi.files.length > 1) { b.textContent = fi.files.length + ' fișiere alese'; }
+      else if (fi.files.length > 1) { b.textContent = fi.files.length + (document.documentElement.lang === 'en' ? ' files selected' : ' fișiere alese'); }
     });
   });
 

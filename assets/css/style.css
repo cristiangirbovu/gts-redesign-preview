@@ -86,6 +86,10 @@ section{scroll-margin-top:124px}
 .topbar a:hover{color:#fff;text-decoration:underline;text-underline-offset:3px}
 .topbar .lang b{color:#fff}
 .topbar .sep{opacity:.45;margin:0 .45rem;color:var(--pe-fond-doi)}
+/* Comutatorul de limba RO / EN, la capatul barei de sus. */
+.topbar .lang-switch{gap:.35rem;margin-left:.9rem;padding:.14rem .62rem;border:1px solid rgba(237,241,245,.32);
+  border-radius:999px;color:#fff;font-weight:700;letter-spacing:.01em}
+.topbar .lang-switch:hover{background:rgba(255,255,255,.1);text-decoration:none}
 
 /* ---------- Header / Nav ---------- */
 header.site{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.94);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
@@ -477,7 +481,10 @@ footer a:hover{color:#fff}
   .topbar .topbar-tel{display:flex;flex-wrap:wrap;justify-content:center;gap:0 1.1rem;width:100%}
   .topbar .topbar-tel .sep{display:none}
   .topbar .topbar-tel a{white-space:nowrap;padding:.2rem 0}
-  .topbar .lang{width:100%;display:flex;justify-content:center;flex-wrap:wrap}
+  .topbar .lang{width:100%;display:flex;justify-content:center;align-items:center;flex-wrap:wrap}
+  /* „Oferta in maxim 2 ore" apare oricum in banda de incredere de dedesubt; pe telefon
+     il scoatem din bara, ca e-mailul si butonul de limba sa incapa pe acelasi rand. */
+  .topbar .lang > span{display:none}
   .foot-grid{grid-template-columns:1fr}
 }
 @media(prefers-reduced-motion:reduce){.js .reveal{opacity:1;transform:none;transition:none}*{scroll-behavior:auto}

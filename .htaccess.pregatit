@@ -29,6 +29,15 @@ Redirect 301 /acreditare-iso.html   /acreditare-iso/
 Redirect 301 /confidentialitate.html /confidentialitate/
 Redirect 301 /termeni.html          /termeni/
 
+# --- versiunea in engleza a site-ului vechi -> paginile noi din /en/ ---------
+# (/en/index.html e acoperit de regula generala pentru index.html, mai jos)
+Redirect 301 /en/services.html          /en/services/
+Redirect 301 /en/faq.html               /en/faq/
+Redirect 301 /en/iso-accreditation.html /en/iso-accreditation/
+Redirect 301 /en/privacy.html           /en/privacy/
+Redirect 301 /en/terms.html             /en/terms/
+Redirect 301 /en/thanks.html            /en/thank-you/
+
 # --- blog mutat de pe subdomeniu -------------------------------------------
 # Acestea se pun pe subdomeniul blog.gtstraduceri.ro, nu aici.
 # Fiecare articol primeste adresa noua, cu subiectul in URL:
