@@ -17,8 +17,9 @@ param(
   [string]$BasePath = '',
 
   # Modul de verificare: evidentiaza afirmatiile marcate cu <span class="tbc">
-  # si adauga banda explicativa. Se dezactiveaza cu -Review:$false pentru productie.
-  [bool]$Review = $true
+  # si adauga banda galbena explicativa. Oprit implicit din 7 oct 2026, la cererea
+  # clientei (verificarea textelor s-a incheiat); se reporneste cu -Review:$true.
+  [bool]$Review = $false
 )
 
 $ErrorActionPreference = 'Stop'
