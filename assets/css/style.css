@@ -465,7 +465,14 @@ footer a:hover{color:#fff}
   .mobile-bar{display:flex}
   .wa-float{display:none}
   body{padding-bottom:64px}
-  .topbar .hide-sm{display:none}
+  /* Pe telefon numerele birourilor raman vizibile: primul rand, centrate.
+     Pe ecranele foarte inguste trec unul sub altul, fara sa se rupa. */
+  .topbar{font-size:.86rem}
+  .topbar .wrap{justify-content:center;gap:.1rem 1rem;padding-top:.4rem;padding-bottom:.4rem}
+  .topbar .topbar-tel{display:flex;flex-wrap:wrap;justify-content:center;gap:0 1.1rem;width:100%}
+  .topbar .topbar-tel .sep{display:none}
+  .topbar .topbar-tel a{white-space:nowrap;padding:.2rem 0}
+  .topbar .lang{width:100%;display:flex;justify-content:center;flex-wrap:wrap}
   .foot-grid{grid-template-columns:1fr}
 }
 @media(prefers-reduced-motion:reduce){.js .reveal{opacity:1;transform:none;transition:none}*{scroll-behavior:auto}
