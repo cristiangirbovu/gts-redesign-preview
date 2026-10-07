@@ -19,7 +19,12 @@ param(
   # Modul de verificare: evidentiaza afirmatiile marcate cu <span class="tbc">
   # si adauga banda galbena explicativa. Oprit implicit din 7 oct 2026, la cererea
   # clientei (verificarea textelor s-a incheiat); se reporneste cu -Review:$true.
-  [bool]$Review = $false
+  [bool]$Review = $false,
+
+  # Productie (site-ul live): fara blocarea pentru motoarele de cautare. Fara acest
+  # parametru (preview local si GitHub Pages) toate paginile raman noindex,nofollow,
+  # ca preview-ul sa nu concureze cu site-ul real in Google.
+  [switch]$Productie
 )
 
 $ErrorActionPreference = 'Stop'
@@ -66,6 +71,14 @@ function Expand-Partials([string]$text, [hashtable]$table) {
     })
   }
   return $text
+}
+
+# Versiune calculata din continut pentru CSS/JS: serverul le tine in cache un an, iar
+# parametrul ?v= se schimba singur la orice modificare, deci browserul ia imediat varianta noua.
+$AssetVer = @{}
+foreach ($rel in @('assets/css/style.css', 'assets/css/fonts.css', 'assets/js/main.js')) {
+  $p = Join-Path $Root ($rel -replace '/', '\')
+  if (Test-Path $p) { $AssetVer[$rel] = (Get-FileHash $p -Algorithm MD5).Hash.Substring(0, 8).ToLower() }
 }
 
 $script:Urls  = @()
@@ -129,6 +142,14 @@ function Render-Page([string]$raw, [string]$sourceName) {
   $html = $html.Replace('{{DESC}}',    $meta['desc'])
   $html = $html.Replace('{{URL}}',     $url)
 
+  # Robots: pe preview totul e blocat; in productie doar paginile cu "robots: noindex"
+  # (multumire, 404), care nu trebuie sa apara in Google si nici in sitemap.
+  $faraIndex = ($meta['robots'] -eq 'noindex')
+  if (-not $Productie) { $robots = '<meta name="robots" content="noindex,nofollow">' }
+  elseif ($faraIndex)  { $robots = '<meta name="robots" content="noindex">' }
+  else                 { $robots = '' }
+  $html = $html.Replace('{{ROBOTS}}', $robots)
+
   if ($Review) {
     $html = $html.Replace('{{REVIEWCLASS}}', ' class="review-mode"')
     $html = $html.Replace('{{REVIEWBAR}}',
@@ -160,6 +181,10 @@ function Render-Page([string]$raw, [string]$sourceName) {
     $html = $html -replace ('data-k="' + [regex]::Escape($nav) + '"'), ('data-k="' + $nav + '" class="active"')
   }
 
+  foreach ($k in $AssetVer.Keys) {
+    $html = $html.Replace('"/' + $k + '"', '"/' + $k + '?v=' + $AssetVer[$k] + '"')
+  }
+
   # Prefixeaza legaturile interne absolute, pentru gazduire pe subcale.
   # Nu atinge http(s):// , // , mailto: , tel: sau ancore.
   if ($BasePath -ne '') {
@@ -167,6 +192,12 @@ function Render-Page([string]$raw, [string]$sourceName) {
   }
 
   if ($url -eq '/') { $outFile = Join-Path $Root 'index.html' }
+  elseif ($url -match '\.html$') {
+    # adrese de tip fisier, pastrate identic cu site-ul vechi (ex. /thanks.html din formular, /404.html)
+    $outFile = Join-Path $Root ($url.TrimStart('/') -replace '/', '\')
+    $outDirF = Split-Path -Parent $outFile
+    if (-not (Test-Path $outDirF)) { New-Item -ItemType Directory -Path $outDirF -Force | Out-Null }
+  }
   else {
     $outDir = Join-Path $Root ($url.Trim('/') -replace '/', '\')
     if (-not (Test-Path $outDir)) { New-Item -ItemType Directory -Path $outDir -Force | Out-Null }
@@ -175,7 +206,7 @@ function Render-Page([string]$raw, [string]$sourceName) {
 
   [System.IO.File]::WriteAllText($outFile, $html, $Utf8)
   $script:Built++
-  $script:Urls += $url
+  if (-not $faraIndex) { $script:Urls += $url }
   Write-Host ("  {0,-44} -> {1}" -f $url, ($outFile.Replace($Root, '.')))
 }
 

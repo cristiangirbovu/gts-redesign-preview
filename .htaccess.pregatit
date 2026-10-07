@@ -9,6 +9,22 @@
 
 RewriteEngine On
 
+# --- securitate --------------------------------------------------------------
+# Site-ul e complet static: nu ruleaza niciun script PHP. Blocam orice fisier PHP
+# (inclusiv un eventual webshell reincarcat, ca dupa incidentul din iulie 2026),
+# fisierele de proiect Mobirise (contineau parolele FTP/cPanel) si arhivele sau
+# jurnalele lasate pe server. Fara listarea continutului folderelor.
+Options -Indexes
+<FilesMatch "\.(php[0-9]?|phtml|phar|mobirise|sql|bak|log|zip|tar|gz|rar)$">
+  <IfModule mod_authz_core.c>
+    Require all denied
+  </IfModule>
+  <IfModule !mod_authz_core.c>
+    Order allow,deny
+    Deny from all
+  </IfModule>
+</FilesMatch>
+
 # --- www + https canonic ---------------------------------------------------
 RewriteCond %{HTTPS} off [OR]
 RewriteCond %{HTTP_HOST} !^www\. [NC]
@@ -52,13 +68,16 @@ RewriteRule ^(.*)index\.html$ /$1 [R=301,L]
 <IfModule mod_deflate.c>
   AddOutputFilterByType DEFLATE text/html text/css application/javascript image/svg+xml
 </IfModule>
+# CSS si JS au ?v= din continut (vezi build.ps1), deci pot sta un an in cache fara risc.
+# CSS si JS au ?v= din continut (vezi build.ps1), deci pot sta un an in cache fara risc.
 <IfModule mod_expires.c>
   ExpiresActive On
   ExpiresByType text/css            "access plus 1 year"
   ExpiresByType application/javascript "access plus 1 year"
-  ExpiresByType image/jpeg          "access plus 1 year"
-  ExpiresByType image/png           "access plus 1 year"
-  ExpiresByType image/svg+xml       "access plus 1 year"
+  ExpiresByType image/jpeg          "access plus 1 month"
+  ExpiresByType image/png           "access plus 1 month"
+  ExpiresByType image/svg+xml       "access plus 1 month"
+  ExpiresByType font/woff2          "access plus 1 year"
   ExpiresByType text/html           "access plus 0 seconds"
 </IfModule>
 
